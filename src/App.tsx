@@ -12,7 +12,9 @@ function App() {
   const params = new URLSearchParams(window.location.search)
   const sessionId = params.get('session') || 'demo-session'
   const tableNumber = params.get('table') || '12'
-  const session = getSession(sessionId, tableNumber)
+  const sessionFromStorage = getSession(sessionId, tableNumber)
+  const forceClosed = params.get('status') === 'closed' || params.get('closed') === 'true'
+  const session = forceClosed ? { ...sessionFromStorage, status: 'closed' as const } : sessionFromStorage
   const [locale, setLocale] = useState<Locale>('th')
   const [view, setView] = useState<'menu' | 'cart' | 'orders'>('menu')
   const [category, setCategory] = useState('all')
