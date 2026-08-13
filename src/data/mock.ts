@@ -21,7 +21,7 @@ export const menuItems: MenuItem[] = [
   { id: 'lime-soda', categoryId: 'drink', nameTh: 'มะนาวโซดา', nameEn: 'Lime soda', descriptionTh: 'สดชื่นซาบซ่า เปรี้ยวหวานลงตัว', descriptionEn: 'Refreshing sparkling lime drink', imageUrl: img('photo-1513558161293-cdaf765ed2fd'), price: 60, available: true },
 ]
 
-export const defaultSession = (id: string, tableNumber: string): TableSession => ({ id, tableNumber, status: 'closed', openedAt: new Date().toISOString() })
+export const defaultSession = (id: string, tableNumber: string): TableSession => ({ id, tableNumber, status: 'open', openedAt: new Date().toISOString() })
 
 export const seedOrders: Order[] = [
   { id: 'order-1001', items: [{ menuItemId: 'green-curry', quantity: 1, note: '', nameTh: 'แกงเขียวหวานไก่', nameEn: 'Green curry with chicken', unitPrice: 150, lineTotal: 150 }], total: 150, status: 'preparing', createdAt: new Date(Date.now() - 18 * 60_000).toISOString() },
