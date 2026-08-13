@@ -1,36 +1,27 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
+# FoodDrink SPA
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Mobile-first React SPA สำหรับสั่งอาหารผ่าน QR code ประจำโต๊ะ รองรับเมนู ตะกร้าร่วม ออเดอร์ และภาษาไทย/อังกฤษ โดยค่าเริ่มต้นใช้ mock service และ `localStorage`.
 
-Currently, two official plugins are available:
+## Commands
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm run dev                 # development server
+npm run build               # typecheck + production build
+npm run lint                # Oxlint
+npm run storybook           # component development at :6006
+npm run test:e2e            # Playwright smoke tests
+npm run test:e2e:install    # install Chromium once per machine
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
-=======
-# fooddrink
->>>>>>> 5ab3fc3 (Initial commit)
+ตัวอย่าง URL: `/?table=12&session=demo-session` และใช้ `&status=closed` เพื่อจำลองโต๊ะปิด
+
+## Architecture
+
+- `src/app` และ `src/App.tsx`: application composition และ view state ของ SPA
+- `src/components`: UI components ที่แยกทดสอบและทำ Storybook ได้
+- `src/lib`: pure functions เช่น translation และ formatting
+- `src/services`: service boundary สำหรับ mock/API implementation
+- `e2e`: user-flow tests ที่ Playwright มองผ่าน browser จริง
+- `specs`: product และ quality requirements
+
+หลักการสำคัญคือ component รับข้อมูลและ callback ผ่าน props, business logic อยู่ใน service/lib, หลีกเลี่ยง side effect ใน presentational component และใช้ accessible role/label เป็น contract ของ E2E test.
